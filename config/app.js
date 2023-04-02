@@ -1,4 +1,5 @@
 module.exports = {
+  'cron': process.env.CRON || '*/5 * * * * *',
   'secret': process.env.SECRET || 'nobody knows giaa',
   'database': process.env.DB_URL || 'mongodb://localhost:27017/giaa',
   'api_daily_quota': process.env.DAILY_QUOTA || 200,

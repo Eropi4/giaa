@@ -11,7 +11,7 @@ var parse = require('url-parse');
 mongoose.set('useCreateIndex', true);
 
 console.log('Starting indexer service...');
-new CronJob('*/5 * * * * *', function() {
+new CronJob(config.cron, function() {
 
   utils.remainingUrls(function(err, count) {
     if(err){
