@@ -65,10 +65,6 @@ router.get('/request/:page', function(req, res, next) {
       })
     });
 
-    utils.remainingUrlsPerCif(function(err, result) {
-      console.log(err, result);
-    });
-
   });
 });
 
