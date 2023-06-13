@@ -20,8 +20,8 @@ services:
       - 3000:3000
     environment:
       - DB_URL=mongodb://giaa:giaa@mongodb/giaa
-    volumes:
-      - ./cids:/app/config/cids
+#    volumes:
+#      - ./cids:/app/config/cids
 
 volumes:
   db:
