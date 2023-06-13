@@ -11,14 +11,7 @@
             <div class="form-group">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text igroup" class="igroup">Url/urls
-                  [quota:
-                  {% if quota <= 0 %}
-                    <span class="red">{{quota}}</span>
-                  {% else %}
-                    <span>{{quota}}</span>
-                  {% endif %}
-                  ]</span>
+                  <span class="input-group-text igroup" class="igroup">Url/urls</span>
                 </div>
                 <textarea class="form-control" id="url" name="url" rows="3"></textarea>
               </div>
@@ -48,6 +41,32 @@
             </div>
             <button type="submit" class="btn btn-primary">Notify Url/s</button>
           </form>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12 py-4">
+          <table class="table table-striped table-bordered table-responsive-xl">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" class="nowrap">Cif</th>
+              <th scope="col" class="nowrap">Quota left</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cif, count in quota %}
+                {% if count <= 0 %}
+                  {% set color = 'red' %}
+                {% endif %}
+                <tr class="{{color}}" id="{{url.id}}">
+                  <td>{{loop.index}}</td>
+                  <td>{{cif}}</td>
+                  <td>{{count}}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+         </table>
         </div>
       </div>
       <hr>

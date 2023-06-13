@@ -44,8 +44,7 @@ router.get('/request/:page', function(req, res, next) {
   urls.exec(function (err, urls) {
     if (err) return handleError(err);
 
-    utils.remainingUrls(function(err, count){
-      var count = config.api_daily_quota - count;
+    utils.remainingUrlsPerCif(function(err, quota_left){
       var pagination = Url.countDocuments();
 
       (typeof req.query.type !== 'undefined' && req.query.type !== '' )? pagination.where({ type: req.query.type }) : null;
@@ -58,12 +57,16 @@ router.get('/request/:page', function(req, res, next) {
         res.render('index', {
             title: 'Giaa: Google Indexing API Automator',
             urls: urls,
-            quota: count,
+            quota: quota_left,
             current: page,
             pages: Math.ceil(pagecount / perPage),
             params: req.query
         })
       })
+    });
+
+    utils.remainingUrlsPerCif(function(err, result) {
+      console.log(err, result);
     });
 
   });

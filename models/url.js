@@ -9,7 +9,8 @@ var UrlSchema = new Schema({
   response_status_message: { type: String },
   notifytime: { type: Date },
   status: { type: String },
-  updatedat: { type: Date }
+  updatedat: { type: Date },
+  cif_used: { type: String }
 });
 
 UrlSchema.plugin(AutoIncrement, {inc_field: 'id'});

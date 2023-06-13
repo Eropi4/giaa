@@ -65,3 +65,5 @@ config/cids/*.json
 config/client_id
 tmp/*
 cids
+
+.idea
