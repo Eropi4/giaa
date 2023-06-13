@@ -13,17 +13,28 @@ mongoose.set('useCreateIndex', true);
 console.log('Starting indexer service...');
 new CronJob(config.cron, function() {
 
+
+
   utils.remainingUrlsPerCif(function(err, cifQuota) {
     if(err){
       console.log(err);
+      return;
     }
 
-    var totalQuota = Object.values(cifQuota).reduce((a, b) => a + b, 0);
+    var totalQuota = 0;
+    Object.keys(cifQuota).forEach(key => {
+      totalQuota += Number(cifQuota[key])
+    });
+
+    console.log('[WORKER] Processing urls with total quota ' + totalQuota);
 
     if(totalQuota > 0){
       var urls = Url.find({ 'status': 'pending' }).limit(totalQuota);
       urls.exec(function (err, urls) {
-        if (err) return handleError(err);
+        if (err) {
+          console.log(err);
+          return;
+        }
         urls.forEach(function(url, index, arr){
           console.log('Processing url: ' + url.location);
           var purl = parse(url.location, true);
